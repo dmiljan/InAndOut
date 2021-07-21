@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using InAndOut.Models;//Item
+using InAndOut.Models;//<Item>
 using Microsoft.EntityFrameworkCore; //DbContext 
 
 namespace InAndOut.Data
@@ -14,6 +14,6 @@ namespace InAndOut.Data
 
         }
 
-        public DbSet<Item> Items { get; set; }
+        public DbSet<Item> Items { get; set; } //Items je ime tabele
     }
 }
