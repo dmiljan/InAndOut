@@ -43,9 +43,8 @@ namespace InAndOut.Controllers
             return View(obj);//i bez prosledjivanja objekta isto radi???ako nisu podaci ispravni onda idi na view opet
         }
 
-        //???[HttpPost] ne treba jer saljemo usera na drugu stranicu tj ovdje pozivamo samo formu
         //GET-Delete
-        public IActionResult Delete(int? id)//submit forme 
+        public IActionResult Delete(int? id) //otvori se forma
         {
             if (id == null || id == 0)
             {
@@ -72,6 +71,35 @@ namespace InAndOut.Controllers
             _db.Expenses.Remove(obj); 
             _db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        //GET-Update
+        public IActionResult Update(int? id) //otvori se forma
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            var obj = _db.Expenses.Find(id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            return View(obj);
+        }
+
+        //POST-Update
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Update(Expense obj)//submit forme 
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Expenses.Update(obj); 
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(obj);//i bez prosledjivanja objekta isto radi vjerovatno zato sto je validacija na strani klijenta i ne poniste se podaci uopste u formi???ako nisu podaci ispravni onda idi na view opet
         }
     }
 }
