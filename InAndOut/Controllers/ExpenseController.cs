@@ -34,9 +34,13 @@ namespace InAndOut.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Expense obj)//submit forme 
         {
-            _db.Expenses.Add(obj); //Entity framework
-            _db.SaveChanges();
-            return RedirectToAction("Index");
+            if(ModelState.IsValid) 
+            {
+                _db.Expenses.Add(obj); //Entity framework
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(obj);//i bez prosledjivanja objekta isto radi???ako nisu podaci ispravni onda idi na view opet
         }
     }
 }
