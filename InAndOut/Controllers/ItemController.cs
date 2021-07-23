@@ -24,7 +24,7 @@ namespace InAndOut.Controllers
         }
 
         //GET-Create
-        public IActionResult Create()//prikaz stranice forme za unos
+        public IActionResult Create()
         {
             return View();
         }
@@ -32,9 +32,9 @@ namespace InAndOut.Controllers
         //POST-Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Item obj)//submit forme 
+        public IActionResult Create(Item obj)
         {
-            _db.Items.Add(obj); //Entity framework
+            _db.Items.Add(obj); 
             _db.SaveChanges(); 
             return RedirectToAction("Index");
         }
